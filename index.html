@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <canvas id="myCanvas" width="600" height="600" style="border:1px dashed #fff inset"></canvas>
+
+    <script>
+
+        var canvas;
+        var ctx;
+        window.onload = function () {
+            canvas = document.getElementById("myCanvas");
+            ctx = canvas.getContext("2d");
+            document.addEventListener("keydown", keyPush);
+
+            setInterval(game, 1000 / 15);
+        }
+        
+        var i=0;
+        var score = 0;
+        var xv = 0;
+        var yv = 0;
+        var px = 10;
+        var py = 10;
+        var gs = 20;
+        var tc = 30
+        var ax = 15;
+        var ay = 15;
+        var trail = [];
+        var tail = 5;
+        function game() {
+            
+            px += xv;
+            py += yv;
+
+            if (px < 0) {
+                px = tc - 1;
+            }
+            if (px > tc - 1) {
+                px = 0;
+            }
+            if (py < 0) {
+                py = tc - 1;
+            }
+            if (py > tc - 1) {
+                py = 0;
+            }
+            ctx.fillStyle = "black";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = "lime";
+            for (var i = 0; i < trail.length; i++) {
+                ctx.fillRect(trail[i].x * gs, trail[i].y * gs, gs - 2, gs - 2);
+                if (trail[i].x == px && trail[i].y == py && i!=1) {
+                    tail=5;
+                    if(score>0){
+                        score--;
+                    }
+                    else{
+                        score=0;
+                    }
+                }
+                
+            }
+            
+
+            trail.push({
+                x: px,
+                y: py
+            });
+
+            while (trail.length > tail) {
+                trail.shift();
+            }
+
+            if (px == ax && py == ay) {
+                tail++;
+                score++;
+                ax = Math.floor(Math.random() * tc);
+                ay = Math.floor(Math.random() * tc);
+            }
+
+
+            ctx.fillStyle = "blue";
+            ctx.fillRect(ax * gs, ay * gs, gs - 2, gs - 2);
+
+        }
+
+        function keyPush(e) {
+            switch (e.keyCode) {
+                case 37:
+                    xv = -1; yv = 0;
+                    i++;
+                    break;
+                case 38:
+                    xv = 0; yv = -1;
+                    i++;
+                    break;
+                case 39:
+                    xv = 1; yv = 0;
+                    i++;
+                    break;
+                case 40:
+                    xv = 0; yv = 1;
+                    i++;
+                    break;
+                    case 81:
+                    alert(score);
+            }
+            
+        }
+
+
+    </script>
+</body>
+
+</html>
