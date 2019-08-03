@@ -36,23 +36,6 @@ app.on('ready', function () {
     Menu.setApplicationMenu(mainMenu);
 });
 
-// Handle score window
-// function createAddWindow(){
-//     addWindow = new BrowserWindow({
-//       maxWidth: 300,
-//       maxHeight:200,
-//       title:'Add Shopping List Item'
-//     });
-//     addWindow.loadURL(url.format({
-//       pathname: path.join(__dirname, 'addWindow.html'),
-//       protocol: 'file:',
-//       slashes:true
-//     }));
-//     // Handle garbage collection
-//     addWindow.on('close', function(){
-//       addWindow = null;
-//     });
-//   }
 
 // Create menu template
 const mainMenuTemplate = [
