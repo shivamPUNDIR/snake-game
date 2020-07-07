@@ -9,6 +9,6 @@
   "author": "shivam pundir",
   "license": "MIT",
   "dependencies": {
-    "electron": "^6.0.0"
+    "electron": "^9.1.0"
   }
 }
